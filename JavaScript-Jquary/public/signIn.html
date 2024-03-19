@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>SIGN IN UYGULAMASI</title>
+      
+      
+      
+      
+      <style>
+        body{
+          margin:0;
+          background-color:aquamargine;
+          display:flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          
+          
+          
+        }
+        .signIn-box {
+          width: 400px;
+          height:700px;
+          background:transparent;
+          border:2px solid rgba(255,255,255,.5);
+          position:absolute;
+          border-radius:20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          backdrop-filter:blur(15px);
+        }
+        
+        .input-box{
+          position:relative;
+          width: 300px;
+          margin: 20px 0;
+          border-bottom: 2px solid #fff;
+          
+        }
+        .input-box label {
+          position: absolute;
+          top: 50%;
+          left:5px;
+          transform:translateY(-50%);
+          font-size: 1em;
+          color: #fff;
+          pointer-events:none;
+  
+        }
+        
+        .input-box input:focus~label,
+        .input-box input:valid~label {
+          top: -5px;
+        }
+        
+        
+        
+        .input-box input{
+          width:100%;
+          height:30px;
+          background:transparent;
+          border:none;
+          outline:none;
+          font-size: 1em;
+          color: #fff;
+          padding:0 8px 0 5px;
+        
+        }
+        
+        button{
+          width:100%;
+          height:40px;
+          background:#fff;
+          border:none;
+          outline:none;
+          border-radius:40px;
+          cursor:pointer;
+          font-size: 1em;
+          color:#000;
+          font-weight: 500;
+        }
+        
+        .login-link{
+          font-size:.9em;
+          color:#000;
+          text-align: center;
+          margin: 25px 0 10px;
+          
+          
+        }
+        
+        .login-link p a {
+          color:#000;
+          text-decoration:none;
+          font-weight: 600px;
+        }
+        .login-link p a:hover {
+           text-decoration: underline;
+         }
+        
+        
+        
+        h2{
+        font-size:2em;
+        color:#fff;
+        text-align:center;
+        }
+        
+        *{
+         margin:0;
+         padding:0;
+         box-sizing:border-box;
+         font-family:"poppins", sans-serif;
+        
+        }
+        
+      
+      </style>
+    </head>
+    
+    
+    
+    <body id="arka">
+      
+      <div  class="signIn-box">
+        <form>
+        
+          <h2>Sign in</h2>
+      
+          <div class="input-box">
+            <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email"/>
+            <label for="email" ></label>
+          </div>
+          
+          <div class="input-box">
+            <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter Name"/>
+            <label for="fname"></label>
+            
+          </div>
+          
+          <div class="input-box">
+            <input type="text" class="form-control" name="lname" id="lname" placeholder="Enter Surname" /><br>
+            <label for="lname"></label>
+            
+          </div>
+          
+          <div class="input-box">
+            <input type="tel"  class="form-control" name="phone" id="phone" placeholder="Enter Phone Number" />
+            <label for="phone"></label>
+            
+          </div>
+        
+        
+          <div class="input-box">
+            <input type="password"  class="form-control" id="password" name="password" placeholder="Enter Password"/>
+            <label for="passwrd"></label>
+            
+          </div>
+          
+          <div class="input-box">
+            <input type="password"  class="form-control" name="conpassword" id="conpassword" placeholder="Confirm Password"/>
+            <label for="conpasswrd"></label>
+            
+          </div>
+          <button type="button" onclick="kontrolEt()" id="btnSubmit" class="btn btn-primary">Sign in</button>
+          
+          <div class="login-link">
+            <p>Do you have an account?<a href="#">Login</a></p>
+          </div>
+          
+        </form>  
+      </div>
+      
+      <script src = "https://code.jquery.com/jquery-3.4.1.min.js" type = "text/javascript"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+      
+      
+      
+      <img src="" id="img" width="1400" height="750"/> <!-- img elemti oluşturduk src boş id var -->
+      
+      
+      <script>
+        $(document).ready(function(){
+        	$('form').validate({
+        		rules: {
+        			fname:{
+        				required: true
+        				
+        			},
+        			lname: {
+        				required: true
+        			},
+        			phone: {
+        				required: true,
+        				number:true,
+        			},
+        			email: {
+        				required: true,
+        				email: true 
+        			},
+        			password: {
+        				required: true
+        			},
+        			conpassword: {
+        				required: true,
+        				equalTo:'#password'
+        			}
+        			
+        		},
+        	    messages:{
+        	    	phone:{
+        	    		number: "Lütfen geçerli bir numara giriniz!"
+        	    	},
+        		    email: {
+        		    	email: "Lütfen geçerli bir email adresi girin! "
+        		    	
+        		    },
+        		    conpassword: {
+        		    	equalTo: 'Parolalar Eşleşmiyor!'
+        		    }
+        		    
+        		
+        	    }
+        	
+        		
+        	});
+        	$('#btnSubmit').on('click',function(){
+        		console.log($('form').valid());
+        	});
+        });
+      </script>
+      
+      
+      <script>
+      
+        var girilenEmail;
+        var girilenFname;
+        var girilenLname;
+        var girilenPhone;
+        var girilenPassword;
+        var girilenConpassword;
+        
+        
+        
+        function kontrolEt(){
+        	girilenEmail = document.getElementById("email").value;
+        	girilenFname = document.getElementById("fname").value;
+        	girilenLname = document.getElementById("lname").value;
+        	girilenPhone = document.getElementById("phone").value;
+        	girilenPassword = document.getElementById("password").value;
+        	girilenConpassword = document.getElementById("conpassword").value;
+        	
+        	
+        	if (girilenPassword !== girilenConpassword) {
+                alert("Şifreler eşleşmiyor! Lütfen aynı şifreyi girin.");
+                return; // Şifreler eşleşmiyorsa işlemi sonlandır
+            }
+        	
+        	var bilgiMetni = "Girilen Bilgiler:\n" +
+            "Email: " + girilenEmail + "\n" +
+            "Ad: " + girilenFname + "\n" +
+            "Soyad: " + girilenLname + "\n" +
+            "Telefon: " + girilenPhone + "\n" +
+            "Şifre: " + girilenPassword;
+
+            alert(bilgiMetni);
+            girisEkrani();
+        	
+        	
+        }
+        
+        
+        function girisEkrani(){
+        	window.open("login.html","_self");
+        	
+        }
+        
+        
+        var text; // fonksiyon dışında text oluşturduk
+        
+        function resimSec(){
+        	
+        	var a = ["foto-1.jpg","foto-1.jpg","foto-2.jpg","foto-3.jpg","foto-5.jpg"];//arkaplan resimlerini temsil ediyor array olarak
+        	text = ""; // boş string bir değer olarak tanımladık
+        	
+        	
+            var random = Math.round(Math.random() * 3);
+        	    
+        	text = a[random]; // a arrayinden herhangi bir görüntü seçerek texte atadık
+        		
+        	
+        	
+        }
+        
+        setInterval(function(){ // 2 saniyede 1 renk yarat fonksiyonun çalışmasını belirttik
+        	resimSec();
+        	
+        	document.getElementById("img").src =text;
+        	
+        	
+        },2000);
+      
+       
+      
+      </script>
+      
+    
+    
+    </body>
+  </html>

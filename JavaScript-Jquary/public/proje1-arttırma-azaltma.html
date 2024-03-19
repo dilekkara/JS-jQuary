@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Javascript-Jquary Proje -1 Arttır-Azalt</title>
+    
+    
+      <style>
+        #arttır{
+          background-color:green;
+          color:white;
+          width:35px;
+          height:30px;
+          border:none;
+          font-size:25px;
+        }
+        
+         #azalt{
+          background-color:red;
+          color:white;
+          width:35px;
+          height:30px;
+          border:none;
+          font-size:25px;
+        }
+      
+      
+      
+      </style>
+    
+    
+    
+    </head>
+    
+    
+    
+  
+    <body>
+      <input id="text" type="text" value="0" /> <!--text yapısı oluşturulur ve 0 ile varsayılan değer tanımlandı.-->
+      <button onclick="artirma()" id="arttır">+</button> <!--1.butonumuzu oluşturalım-->
+      <button onclick="azaltma()" id="azalt">-</button> <!--2. butonumuzu oluşturalım-->
+    
+     
+      <script>
+        function artirma(){
+        	var a = document.getElementById("text").value;<!--Text idli inputa ulaşılır ve value değeri alınır a'ya atanır.-->
+        	a = Number(a);
+        	a += 1;
+        	document.getElementById("text").value =a ;
+        }
+        
+        function azaltma(){
+        	var a = document.getElementById("text").value;
+        	a = Number(a);
+        	a -= 1;
+        	document.getElementById("text").value =a ;
+        }
+      
+      
+      
+      
+      
+      
+      
+      
+      </script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </body>
+  </html>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    $(function(){//Elementler için ayrı ayrı validasyon işlemleri oluşturacak fonksiyonlar oluşturalım.
+          $("#form").submit(function(event){
+            var email = $("#emailInput").val();
+            var name = $("#nameInput").val();
+            var surname = $("#surnameInput").val();
+            var ceptel = $("#ceptelInput").val();
+            var password = $("#passwordInput").val();
+            var password2 = $("#password2Input").val();
+           
+            
+            
+            validateEmailField(email,event);
+            validateNameField(name,event);
+            validateSurnameField(surname,event);
+            validateCeptelField(ceptel,event);
+            validatePasswordField(password,event);
+            validatePassword2Field(password2,event);
+            
+          });
+          
+        });
+        
+        
+        //email inputu için bir validasyon fonksiyonu oluşturalım.
+        function validateEmailField(email,event){
+          if(!isValidEmail(email)){
+            $("email-feedback").text("Geçersiz Form.Lütfen doldurunuz.");
+            event.preventDefault();
+          }else {
+          $("#email-feedback").text("");
+          }
+        }
+        function isValidEmail(email){
+          return emailPattern.test(email);
+        }
+        
+        
+        //name için validasyon işlemini gerçekleştirelim.
+        function validateNameField(name,event){
+          if(!isValidName(name)){
+            $("name-feedback").text("Lütfen doldurunuz.");
+            event.preventDefault();
+          }else {
+          $("#name-feedback").text("");
+          }
+        }
+        function isValidName(name){
+          return name.trim() !="";
+        }
+        
+        
+        //surname için valisayon işlemini gerçekleştirelim.
+        function validateSurnameField(surname,event){
+          if(!isValidSurname(surname)){
+            $("surname-feedback").text("Lütfen doldurunuz.");
+            event.preventDefault();
+          }else {
+          $("surname-feedback").text("");
+          }
+        }
+        function isValidSurname(surname){
+          return surname.trim() !="";
+        }
+        
+        //Ceptel için validasyon işlemini gerçekleştirelim.
+        function validateCeptelField(ceptel,event){
+          if(!isValidCeptel(ceptel)){
+            $("ceptel-feedback").text("Geçersiz Form.Lütfen doldurunuz.");
+            event.preventDefault();
+          }else {
+          $("email-feedback").text("");
+          }
+        }
+        function isValidCeptel(ceptel){
+          return ceptel.trim() != "";
+        }
+        
+        //password işlemi için validasyon işlemi gerçekleştirelim.
+        
+        function validatePassword2Field(password2,event){
+          var password = $("#passwordInput").val();
+          var password2 = $("#password2Input").val();
+  
+          if(password === password2){
+             $("#password2-feedback").text("Şifreler Eşleşiyor!");
+             event.preventDefault();
+        } else {
+             $("#password-feedback").text("Şifreler Uyuşmuyor");
+        }
+        }
